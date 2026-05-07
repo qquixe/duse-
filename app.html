@@ -5533,6 +5533,7 @@ function closeOnboarding(){
   ob.classList.remove('visible');
   ob.classList.add('hidden');
   umaObMode(false);
+  updateMixerBg();
   // Kapanışta saate göre mesaj
   const t = umaTimeMsg();
   setTimeout(()=>umaShow(t.state, t.msg, 5000), 800);
