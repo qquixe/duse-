@@ -1,0 +1,50 @@
+{
+  "name": "DÜŞÉ — Zihnini Bırak, Rüyana Düş",
+  "short_name": "DÜŞÉ",
+  "description": "Uyku odaklı ses, nefes, rutin ve rüya uygulaması",
+  "start_url": "/app.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#07080f",
+  "theme_color": "#07080f",
+  "orientation": "portrait-primary",
+  "lang": "tr",
+  "categories": ["health", "lifestyle", "music"],
+  "icons": [
+    {
+      "src": "assets/app-icon/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/app-icon/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/app-icon/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Rüya Günlüğü",
+      "short_name": "Günlük",
+      "description": "Rüyanı hemen kaydet",
+      "url": "/app.html#journal",
+      "icons": [{ "src": "assets/app-icon/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Nefes Odası",
+      "short_name": "Nefes",
+      "description": "Nefes egzersizleri",
+      "url": "/app.html#breathe",
+      "icons": [{ "src": "assets/app-icon/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
