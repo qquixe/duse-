@@ -4562,7 +4562,9 @@ function updateMixerBg(){
       mixerVid.setAttribute('data-src', newSrc);
       mixerVid.src = newSrc;
       mixerVid.load();
-      mixerVid.addEventListener('canplay', ()=>mixerVid.play().catch(()=>{}), {once:true});
+      mixerVid.play().catch(()=>{
+        mixerVid.addEventListener('canplay', ()=>mixerVid.play().catch(()=>{}), {once:true});
+      });
     } else if(mixerVid.paused){
       mixerVid.play().catch(()=>{});
     }
