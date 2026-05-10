@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gizlilik Politikası — DÜŞÉ</title>
+  <meta name="theme-color" content="#07080f">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:     #07080f;
+      --bg2:    #0c0e1c;
+      --accent: #b8a9c9;
+      --text:   #e4dff0;
+      --tdim:   rgba(228,223,240,.5);
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'Outfit', sans-serif;
+      --r:      16px;
+    }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--sans);
+      font-weight:300;
+      line-height:1.8;
+      min-height:100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      padding:20px 48px;
+      display:flex; align-items:center; gap:16px;
+      background:linear-gradient(to bottom, rgba(7,8,15,.95) 0%, transparent 100%);
+    }
+    nav a {
+      color:var(--accent);
+      text-decoration:none;
+      font-size:.72rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      opacity:.7;
+      transition:opacity .3s;
+    }
+    nav a:hover { opacity:1; }
+    nav span { color:var(--tdim); font-size:.72rem; }
+
+    /* ── HERO ── */
+    .pp-hero {
+      padding:140px 48px 60px;
+      text-align:center;
+      border-bottom:1px solid rgba(184,169,201,.08);
+    }
+    .pp-eyebrow {
+      font-size:.6rem;
+      letter-spacing:.4em;
+      text-transform:uppercase;
+      color:var(--accent);
+      opacity:.55;
+      margin-bottom:20px;
+    }
+    .pp-title {
+      font-family:var(--serif);
+      font-size:clamp(2rem,5vw,3.2rem);
+      font-weight:300;
+      font-style:italic;
+      line-height:1.15;
+      margin-bottom:20px;
+    }
+    .pp-date {
+      font-size:.72rem;
+      color:var(--tdim);
+      letter-spacing:.12em;
+    }
+
+    /* ── CONTENT ── */
+    .pp-wrap {
+      max-width:720px;
+      margin:0 auto;
+      padding:60px 48px 100px;
+    }
+    .pp-section {
+      margin-bottom:52px;
+    }
+    .pp-section h2 {
+      font-family:var(--serif);
+      font-size:1.35rem;
+      font-weight:400;
+      font-style:italic;
+      color:var(--text);
+      margin-bottom:16px;
+      padding-bottom:10px;
+      border-bottom:1px solid rgba(184,169,201,.1);
+    }
+    .pp-section p {
+      font-size:.85rem;
+      color:var(--tdim);
+      margin-bottom:12px;
+      line-height:1.85;
+    }
+    .pp-section ul {
+      list-style:none;
+      padding:0;
+      margin-bottom:12px;
+    }
+    .pp-section ul li {
+      font-size:.85rem;
+      color:var(--tdim);
+      padding:6px 0 6px 20px;
+      position:relative;
+      line-height:1.7;
+    }
+    .pp-section ul li::before {
+      content:'✦';
+      position:absolute;
+      left:0;
+      color:var(--accent);
+      opacity:.5;
+      font-size:.6rem;
+      top:9px;
+    }
+    .pp-highlight {
+      background:rgba(184,169,201,.06);
+      border:1px solid rgba(184,169,201,.1);
+      border-radius:var(--r);
+      padding:20px 24px;
+      margin-bottom:16px;
+    }
+    .pp-highlight p {
+      margin-bottom:0;
+      color:var(--text);
+      opacity:.8;
+    }
+    a.pp-link {
+      color:var(--accent);
+      opacity:.8;
+      text-decoration:none;
+      border-bottom:1px solid rgba(184,169,201,.3);
+      transition:.25s;
+    }
+    a.pp-link:hover { opacity:1; border-bottom-color:var(--accent); }
+
+    /* ── FOOTER ── */
+    .pp-footer {
+      text-align:center;
+      padding:40px 48px;
+      border-top:1px solid rgba(184,169,201,.08);
+      font-size:.72rem;
+      color:var(--tdim);
+      letter-spacing:.08em;
+    }
+
+    @media(max-width:600px){
+      nav { padding:18px 24px; }
+      .pp-hero { padding:120px 24px 48px; }
+      .pp-wrap { padding:48px 24px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">← DÜŞÉ</a>
+  <span>/</span>
+  <span style="color:var(--tdim);font-size:.72rem;letter-spacing:.1em">Gizlilik Politikası</span>
+</nav>
+
+<header class="pp-hero">
+  <p class="pp-eyebrow">Yasal</p>
+  <h1 class="pp-title">Gizlilik Politikası</h1>
+  <p class="pp-date">Son güncelleme: 10 Mayıs 2026</p>
+</header>
+
+<main class="pp-wrap">
+
+  <div class="pp-section">
+    <div class="pp-highlight">
+      <p>DÜŞÉ, kişisel verilerinizi sunucularımıza göndermez, toplamaz veya üçüncü taraflarla paylaşmaz. Tüm veriler yalnızca kendi cihazınızda saklanır.</p>
+    </div>
+  </div>
+
+  <div class="pp-section">
+    <h2>1. Uygulama Hakkında</h2>
+    <p>DÜŞÉ, uyku kalitesini artırmayı hedefleyen bir web uygulamasıdır. Uygulama; ses atölyesi, nefes egzersizleri, uyku rutini oluşturma, rüya günlüğü ve besin rehberi gibi modüller içerir.</p>
+    <p>DÜŞÉ, sunucu taraflı altyapı kullanmayan, tamamen istemci tabanlı (client-side) bir Progressive Web App (PWA) olarak çalışır.</p>
+  </div>
+
+  <div class="pp-section">
+    <h2>2. Toplanan Veriler</h2>
+    <p>DÜŞÉ, aşağıdaki verileri <strong>yalnızca cihazınızda</strong> saklar:</p>
+    <ul>
+      <li>Rüya günlüğü kayıtları (yazdığınız notlar)</li>
+      <li>Tercih ettiğiniz ses ve atmosfer ayarları</li>
+      <li>Onboarding tamamlama durumu</li>
+      <li>Uyku rutini ve mod tercihleri</li>
+    </ul>
+    <p>Bu veriler tarayıcınızın <strong>localStorage</strong> alanında tutulur. Herhangi bir sunucuya iletilmez. Uygulamayı cihazınızdan kaldırdığınızda veya tarayıcı verilerini temizlediğinizde bu bilgiler de silinir.</p>
+  </div>
+
+  <div class="pp-section">
+    <h2>3. Toplanmayan Veriler</h2>
+    <p>DÜŞÉ kesinlikle şunları toplamaz:</p>
+    <ul>
+      <li>Ad, soyad, e-posta veya telefon numarası</li>
+      <li>Konum bilgisi</li>
+      <li>Kullanım istatistikleri veya analitik verisi</li>
+      <li>Cihaz kimliği veya reklam tanımlayıcısı</li>
+      <li>Kamera veya mikrofon erişimi</li>
+      <li>Kişiler veya takvim bilgisi</li>
+    </ul>
+  </div>
+
+  <div class="pp-section">
+    <h2>4. Üçüncü Taraf Hizmetler</h2>
+    <p>DÜŞÉ yalnızca aşağıdaki üçüncü taraf hizmetleri kullanır:</p>
+    <ul>
+      <li><strong>Google Fonts</strong> — Tipografi için (Cormorant Garamond, Outfit). Google Fonts'un kendi <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="pp-link">gizlilik politikası</a> geçerlidir.</li>
+      <li><strong>Netlify</strong> — Uygulama sunucusu. Netlify standart erişim logları tutabilir. Netlify'ın <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener" class="pp-link">gizlilik politikası</a> geçerlidir.</li>
+    </ul>
+    <p>Bu hizmetler dışında herhangi bir reklam ağı, analitik aracı veya takip sistemi kullanılmamaktadır.</p>
+  </div>
+
+  <div class="pp-section">
+    <h2>5. Çocukların Gizliliği</h2>
+    <p>DÜŞÉ, 13 yaşın altındaki çocuklara yönelik değildir ve bu yaş grubundan bilerek veri toplamaz. Ebeveyn veya yasal vasi olarak endişeniz varsa bizimle iletişime geçebilirsiniz.</p>
+  </div>
+
+  <div class="pp-section">
+    <h2>6. Verilerinizin Kontrolü</h2>
+    <p>Uygulama içinde saklanan tüm veriler tamamen sizin kontrolünüzdedir:</p>
+    <ul>
+      <li>Tarayıcı ayarlarından site verilerini temizleyerek tüm verileri silebilirsiniz</li>
+      <li>Rüya günlüğü kayıtlarını uygulama içinden tek tek silebilirsiniz</li>
+      <li>Uygulama izinleri (bildirim vb.) tarayıcı ayarlarından kaldırılabilir</li>
+    </ul>
+  </div>
+
+  <div class="pp-section">
+    <h2>7. Güvenlik</h2>
+    <p>DÜŞÉ, HTTPS üzerinden sunulmaktadır. Verileriniz cihazınızın yerel depolama alanında bulunduğundan, cihaz güvenliği doğrudan veri güvenliğinizi etkiler.</p>
+  </div>
+
+  <div class="pp-section">
+    <h2>8. Politika Değişiklikleri</h2>
+    <p>Bu gizlilik politikası gerektiğinde güncellenebilir. Değişiklikler bu sayfada yayımlanacak ve "Son güncelleme" tarihi güncellenecektir.</p>
+  </div>
+
+  <div class="pp-section">
+    <h2>9. İletişim</h2>
+    <p>Gizlilik politikasına ilişkin sorularınız için:</p>
+    <ul>
+      <li>E-posta: <a href="mailto:yucetasyigit289@gmail.com" class="pp-link">yucetasyigit289@gmail.com</a></li>
+      <li>Web: <a href="https://duseapp.com.tr" class="pp-link">duseapp.com.tr</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<footer class="pp-footer">
+  © 2026 DÜŞÉ — İbrahim Yiğit Yücetaş &nbsp;·&nbsp; <a href="index.html" class="pp-link">Ana Sayfa</a>
+</footer>
+
+</body>
+</html>
