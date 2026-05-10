@@ -41,18 +41,102 @@
   ],
   "screenshots": [
     {
-      "src": "assets/screenshots/screen-wide.jpg",
-      "sizes": "1280x720",
+      "src": "assets/screenshots/screen-wide-1.jpg",
+      "sizes": "1882x905",
       "type": "image/jpeg",
       "form_factor": "wide",
       "label": "DÜŞÉ — Ses Atölyesi"
     },
     {
-      "src": "assets/screenshots/screen-mobile.jpg",
-      "sizes": "390x844",
+      "src": "assets/screenshots/screen-wide-2.jpg",
+      "sizes": "1887x882",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "DÜŞÉ — Nefes Odası"
+    },
+    {
+      "src": "assets/screenshots/screen-wide-3.jpg",
+      "sizes": "1509x883",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "DÜŞÉ — Uygulama"
+    },
+    {
+      "src": "assets/screenshots/screen-wide-4.jpg",
+      "sizes": "1880x908",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "DÜŞÉ — Landing Page"
+    },
+    {
+      "src": "assets/screenshots/mobile-opening.jpeg",
+      "sizes": "1080x1998",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Karşılama"
+    },
+    {
+      "src": "assets/screenshots/mobile-app-opening.jpeg",
+      "sizes": "1042x2048",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "DÜŞÉ — Ana Ekran"
+    },
+    {
+      "src": "assets/screenshots/mobile-ses-atolyesi.jpeg",
+      "sizes": "1028x2048",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Ses Atölyesi"
+    },
+    {
+      "src": "assets/screenshots/mobile-app-nefes.jpeg",
+      "sizes": "1021x2048",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Nefes Odası"
+    },
+    {
+      "src": "assets/screenshots/mobile-app-ruya.jpeg",
+      "sizes": "1028x2048",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Rüya Günlüğü"
+    },
+    {
+      "src": "assets/screenshots/mobile-app-sergi.jpeg",
+      "sizes": "1019x2048",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Sergi"
+    },
+    {
+      "src": "assets/screenshots/mobile-app-uyku-dongusu-1.jpeg",
+      "sizes": "1076x2048",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Uyku Döngüsü"
+    },
+    {
+      "src": "assets/screenshots/mobile-app-uyku-dongusu-2.jpeg",
+      "sizes": "1080x1748",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Uyku Döngüsü Detay"
+    },
+    {
+      "src": "assets/screenshots/mobile-landing-1.jpeg",
+      "sizes": "1019x2048",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Landing Page"
+    },
+    {
+      "src": "assets/screenshots/mobile-landing-2.jpeg",
+      "sizes": "1080x1902",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Hakkında"
     }
   ],
   "shortcuts": [
