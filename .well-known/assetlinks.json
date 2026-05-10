@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "tr.com.duseapp.twa",
+    "sha256_cert_fingerprints": ["C1:53:E9:7C:3C:48:D0:E6:0F:3E:EB:1F:C8:98:D8:92:CD:DE:92:1F:CA:13:FE:FB:D2:47:AE:7B:37:3C:93:E5"]
+  }
+}]
