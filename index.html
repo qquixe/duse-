@@ -137,12 +137,9 @@
     .stat-card.rv.vis:nth-child(1) { animation-delay:.0s; }
     .stat-card.rv.vis:nth-child(2) { animation-delay:.15s; }
     .stat-card.rv.vis:nth-child(3) { animation-delay:.3s; }
-    /* Science cards: subtle idle border pulse when visible */
-    .sci-card.vis { animation:borderPulse 4s ease-in-out infinite; }
-    .sci-card.vis .sci-icon { animation:iconPulse 3.5s ease-in-out infinite; }
-    .sci-card.vis:nth-child(2) .sci-icon { animation-delay:.5s; }
-    .sci-card.vis:nth-child(3) .sci-icon { animation-delay:1s; }
-    .sci-card.vis:nth-child(4) .sci-icon { animation-delay:1.5s; }
+    /* Science cards: static glow when visible */
+    .sci-card.vis { box-shadow:0 0 18px rgba(184,169,201,.07), inset 0 0 0 1px rgba(184,169,201,.13); }
+    .sci-card.vis .sci-icon { opacity:.85; }
     /* Experience cards: subtle glow ring on hover */
     .exp-card:hover { animation:glowRing 1.6s ease-in-out infinite; }
 
@@ -157,7 +154,7 @@
     #pl-vignette { position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at center,transparent 25%,var(--ink) 100%); }
     #iso-dome { position:absolute;top:50%;left:50%;transform:translate(-52%,-50%);width:min(580px,90vw);height:min(460px,62vh);z-index:3;pointer-events:auto;filter:drop-shadow(0 0 48px rgba(220,218,255,.22)) drop-shadow(0 0 100px rgba(200,198,240,.10)); }
     .hero-eyebrow { position:absolute;top:14%;left:50%;transform:translateX(-52%);white-space:nowrap;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(237,232,245,.48);opacity:0;animation:fadeUp .9s 1.4s forwards;z-index:4; }
-    .hero-inner { position:absolute;bottom:62px;left:50%;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;width:100%; }
+    .hero-inner { position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;width:100%; }
     .hero-title { position:absolute;top:43%;left:56%;transform:translate(-50%,-50%);z-index:5;margin:0;display:flex;align-items:center;justify-content:center; }
     .hero-title img {
       max-height:clamp(28px,4.2vw,58px);width:auto;
@@ -189,7 +186,7 @@
     .sparkle { position:fixed;border-radius:50%;background:var(--accent);pointer-events:none;z-index:9997;transform:translate(-50%,-50%);animation:sparkFade .85s ease forwards; }
     @keyframes sparkFade { 0%{opacity:.75;transform:translate(-50%,-50%) scale(1);}100%{opacity:0;transform:translate(-50%,-60%) scale(0);} }
     .hero-rule { width:1px;height:52px;background:linear-gradient(to bottom,var(--accent),transparent);opacity:0;animation:fadeUp .7s 1.5s forwards;margin-bottom:18px; }
-    .hero-sub { font-family:var(--serif);font-size:clamp(1rem,1.8vw,1.5rem);font-style:italic;font-weight:300;color:rgba(237,232,245,.55);letter-spacing:.18em;opacity:0;animation:fadeUp .9s 1.7s forwards;margin-bottom:46px;line-height:1; }
+    .hero-sub { font-family:var(--sans);font-size:clamp(.62rem,.85vw,.82rem);font-style:normal;font-weight:200;color:rgba(237,232,245,.88);letter-spacing:.42em;text-transform:uppercase;opacity:0;animation:fadeUp .9s 1.7s forwards;margin-bottom:36px;line-height:1; }
     .hero-btns { display:flex;gap:14px;opacity:0;animation:fadeUp .8s 1.9s forwards; }
     .btn-primary { font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:var(--accent);padding:14px 32px;border-radius:40px;text-decoration:none;cursor:none;transition:.35s;border:1px solid var(--accent); }
     .btn-primary:hover { background:var(--text);border-color:var(--text); }
@@ -321,10 +318,10 @@
     .why-compare { max-width:680px;width:100%; }
     .why-cmp-label { font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);opacity:.4;margin-bottom:18px;text-align:center; }
     .why-cmp-table { border:1px solid rgba(184,169,201,.08);border-radius:16px;overflow:hidden; }
-    .why-cmp-row { display:grid;grid-template-columns:1fr 90px 90px 110px;align-items:center;padding:13px 22px;border-bottom:1px solid rgba(184,169,201,.05); }
+    .why-cmp-row { display:grid;grid-template-columns:2fr 1fr 1fr 1fr;align-items:center;padding:13px 22px;border-bottom:1px solid rgba(184,169,201,.05); }
     .why-cmp-row:last-child { border-bottom:none; }
     .why-cmp-head { background:rgba(184,169,201,.03); }
-    .why-cmp-head span { font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:.45; }
+    .why-cmp-head span { font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:.45;text-align:center; }
     .why-cmp-head span:nth-child(2) { color:var(--accent);opacity:.9; }
     .cmp-feat { font-size:.78rem;color:var(--muted); }
     .cmp-y { text-align:center;color:var(--accent);font-size:.85rem; }
@@ -373,12 +370,17 @@
       .exp-content-col{padding-left:0;max-width:100%}
       nav{padding:20px 24px} .nav-links{display:none}
       .why-grid{grid-template-columns:1fr}
-      .why-cmp-row{grid-template-columns:1fr 72px 72px 90px}
+      .why-cmp-row{grid-template-columns:2fr 1fr 1fr 1fr}
     }
     @media(max-width:600px){
       .science-grid{grid-template-columns:1fr}
       .cyc-cards{grid-template-columns:1fr}
       footer{flex-direction:column;gap:14px;text-align:center}
+      .why-compare{overflow-x:auto;-webkit-overflow-scrolling:touch}
+      .why-cmp-table{min-width:420px}
+      .why-cmp-row{grid-template-columns:2fr 1fr 1fr 1fr;padding:11px 14px}
+      .cmp-feat{font-size:.72rem}
+      .why-cmp-head span{font-size:.56rem;letter-spacing:.1em}
     }
 
     /* ══════════════════════════════════
@@ -440,7 +442,7 @@
         grid-column:3;
         justify-self:end;
       }
-      .hero-sub { font-size:clamp(.88rem,3.8vw,1.15rem);margin-bottom:24px; }
+      .hero-sub { font-size:clamp(.65rem,3.2vw,.85rem);letter-spacing:.32em;margin-bottom:24px; }
       .hero-btns { flex-direction:column;align-items:center;gap:10px; }
       .btn-primary,.btn-ghost { width:min(260px,80vw);text-align:center; }
       .hero-inner { bottom:44px; }
@@ -672,7 +674,7 @@
   <h1 class="hero-title" id="hero-title"><img src="assets/logo.png" alt="DÜŞÉ"></h1>
   <div class="hero-inner">
     <div class="hero-rule"></div>
-    <p class="hero-sub">Geceyi Yeniden Tasarla.</p>
+    <p class="hero-sub">Geceyi Yeniden Tasarla</p>
     <div class="hero-btns">
       <a href="app.html" class="btn-primary">Deneyimi Başlat</a>
       <a href="#problem" class="btn-ghost">Keşfet</a>

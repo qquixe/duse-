@@ -99,10 +99,7 @@
     }
     /* Diğer adımlarda köşede küçük Uma */
     .ob-uma-mini {
-      position:absolute; top:16px; right:16px;
-      width:48px; height:48px; object-fit:contain;
-      opacity:.7; animation:obUmaFloat 4.2s ease-in-out infinite;
-      transition:opacity .3s;
+      display:none;
     }
     .ob-eyebrow { font-size:.62rem;letter-spacing:.38em;text-transform:uppercase;color:var(--accent);opacity:.55; }
     .ob-title { font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);font-weight:300;font-style:italic;
@@ -3917,7 +3914,15 @@ const sc=document.getElementById('stars'),sctx=sc.getContext('2d');
 sc.width=window.innerWidth;sc.height=window.innerHeight;
 let stars=[];
 for(let i=0;i<180;i++) stars.push({x:Math.random()*sc.width,y:Math.random()*sc.height,r:Math.random()*.7+.15,o:Math.random()*.4+.1,sp:Math.random()*.005+.002,tw:Math.random()*Math.PI*2});
-(function ds(){sctx.clearRect(0,0,sc.width,sc.height);stars.forEach(s=>{s.tw+=s.sp;const o=s.o*(.5+.5*Math.sin(s.tw));sctx.beginPath();sctx.arc(s.x,s.y,s.r,0,Math.PI*2);sctx.fillStyle=`rgba(184,169,201,${o})`;sctx.fill();});requestAnimationFrame(ds);})();
+let starsRafId=0,starsLastT=0;
+function drawStars(ts){
+  starsRafId=requestAnimationFrame(drawStars);
+  if(ts-starsLastT<33) return; // ~30fps
+  starsLastT=ts;
+  sctx.clearRect(0,0,sc.width,sc.height);
+  stars.forEach(s=>{s.tw+=s.sp;const o=s.o*(.5+.5*Math.sin(s.tw));sctx.beginPath();sctx.arc(s.x,s.y,s.r,0,Math.PI*2);sctx.fillStyle=`rgba(184,169,201,${o})`;sctx.fill();});
+}
+drawStars(0);
 window.addEventListener('resize',()=>{sc.width=window.innerWidth;sc.height=window.innerHeight;});
 
 /* ═══ PANEL THEMES ═══ */
@@ -4239,9 +4244,11 @@ function showPanel(id, el){
   const mixerVid = document.getElementById('mixer-video');
   if(id === 'mixer'){
     updateMixerBg();
+    if(typeof window.ambientResume==='function') window.ambientResume();
   } else {
     mixerBg.style.opacity = '0';
     mixerVid.pause();
+    if(typeof window.ambientPause==='function') window.ambientPause();
   }
 
   // Ortam — ambient video module
@@ -4472,7 +4479,7 @@ function initAmbientCanvas(){
   const canvas = document.getElementById('ambient-canvas');
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H, frame = 0;
+  let W, H, frame = 0, ambRafId = 0, ambLastT = 0;
 
   function resize(){
     W = canvas.width  = canvas.offsetWidth;
@@ -4481,8 +4488,8 @@ function initAmbientCanvas(){
   resize();
   window.addEventListener('resize', resize);
 
-  /* Floating luminous particles */
-  const PTS = Array.from({length:90}, ()=>({
+  /* Floating luminous particles — reduced 90→50 */
+  const PTS = Array.from({length:50}, ()=>({
     x: Math.random(), y: Math.random(),
     vx:(Math.random()-.5)*.0006, vy:(Math.random()-.5)*.0003,
     r: Math.random()*1.4+.3,
@@ -4494,55 +4501,62 @@ function initAmbientCanvas(){
     return Object.values(trackStates).filter(s=>s.on).length / TRACKS.length;
   }
 
-  (function draw(){
-    requestAnimationFrame(draw);
+  function ambDraw(ts){
+    ambRafId = requestAnimationFrame(ambDraw);
+    if(ts - ambLastT < 33) return; // ~30fps
+    ambLastT = ts;
     frame++;
     ctx.clearRect(0,0,W,H);
     const e = energy();
 
-    /* Aurora sine waves — minimum .06 base opacity, not energy-gated */
+    /* Aurora sine waves */
     for(let w=0; w<4; w++){
       const y0 = H*(.2+w*.2);
       const amp = H*(.07 + e*.14);
       const spd = .007+w*.002;
       ctx.beginPath(); ctx.moveTo(0,y0);
-      for(let x=0; x<=W; x+=3){
+      for(let x=0; x<=W; x+=4){ // step 3→4: slightly fewer points
         const y = y0
           + Math.sin(x*.009+frame*spd+w*1.2)*amp
           + Math.sin(x*.016+frame*spd*.8+w*.7)*(amp*.45);
         ctx.lineTo(x,y);
       }
       ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
-      const alpha = (.06 + e*.07)*(1-w*.18);   // always visible
+      const alpha = (.06 + e*.07)*(1-w*.18);
       ctx.fillStyle = `hsla(${258+w*14},72%,62%,${alpha})`;
       ctx.fill();
     }
 
-    /* Central glow pulse — always on */
+    /* Central glow pulse */
     const gx=W*.5, gy=H*.55;
     const glow=ctx.createRadialGradient(gx,gy,0,gx,gy,W*.4);
     glow.addColorStop(0,`hsla(270,55%,55%,${.06+e*.1})`);
     glow.addColorStop(1,'transparent');
     ctx.beginPath();ctx.rect(0,0,W,H);ctx.fillStyle=glow;ctx.fill();
 
-    /* Particles — base alpha bumped up */
+    /* Particles — globalAlpha yerine createRadialGradient: GPU yükü azaltıldı */
     PTS.forEach(p=>{
       p.x += p.vx*(1+e*2.5); p.y += p.vy*(1+e*1.4);
       if(p.x<-.02) p.x=1.02; if(p.x>1.02) p.x=-.02;
       if(p.y<-.02) p.y=1.02; if(p.y>1.02) p.y=-.02;
       const px=p.x*W, py=p.y*H;
-      const a = p.a*(.42+e*.58);   // was .18+e*.82 — much brighter at rest
+      const a = p.a*(.42+e*.58);
       const glowR = p.r*5.5+e*6;
-      const g=ctx.createRadialGradient(px,py,0,px,py,glowR);
-      g.addColorStop(0,`hsla(${p.hue},75%,72%,${a*.45})`);
-      g.addColorStop(1,`hsla(${p.hue},75%,72%,0)`);
+      ctx.globalAlpha = a * .3;
       ctx.beginPath(); ctx.arc(px,py,glowR,0,Math.PI*2);
-      ctx.fillStyle=g; ctx.fill();
-      ctx.beginPath(); ctx.arc(px,py,p.r,0,Math.PI*2);
-      ctx.fillStyle=`hsla(${p.hue},80%,78%,${a})`;
+      ctx.fillStyle=`hsl(${p.hue},75%,72%)`;
       ctx.fill();
+      ctx.globalAlpha = a;
+      ctx.beginPath(); ctx.arc(px,py,p.r,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${p.hue},80%,78%)`;
+      ctx.fill();
+      ctx.globalAlpha = 1;
     });
-  })();
+  }
+
+  window.ambientPause  = ()=>{ cancelAnimationFrame(ambRafId); ambRafId=0; };
+  window.ambientResume = ()=>{ if(!ambRafId) ambDraw(performance.now()); };
+  ambDraw(0);
 }
 
 /* ─── Mixer background video updater ─── */
@@ -5517,7 +5531,10 @@ const obRecs = {
 
 function umaObMode(on){
   const w = document.getElementById('uma-widget');
-  if(w) w.style.zIndex = on ? '9100' : '490';
+  if(!w) return;
+  w.style.opacity = on ? '0' : '1';
+  w.style.pointerEvents = on ? 'none' : '';
+  w.style.zIndex = on ? '9100' : '490';
 }
 
 function initOnboarding(){
@@ -5702,6 +5719,20 @@ document.querySelectorAll('.ob-mood,.ob-btn,.ob-btn-ghost,.ob-ctx').forEach(el=>
 
 // Başlat — localStorage satırını yoruma alırsak her açılışta çıkar
 initOnboarding();
+
+/* ═══ CANVAS PAUSE ON BACKGROUND (ses çalmaya devam eder) ═══ */
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){
+    // Canvas döngülerini durdur — ses/audio dokunulmaz
+    cancelAnimationFrame(starsRafId); starsRafId=0;
+    if(typeof window.ambientPause==='function') window.ambientPause();
+  } else {
+    // Ekrana dönünce canvas'ları yeniden başlat
+    if(!starsRafId) drawStars(performance.now());
+    const mixerActive = document.getElementById('panel-mixer')?.classList.contains('active');
+    if(mixerActive && typeof window.ambientResume==='function') window.ambientResume();
+  }
+});
 
 /* ══ MOBİL AÇILIŞ SPLASH ══ */
 (function(){
