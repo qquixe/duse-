@@ -5710,6 +5710,28 @@ if('serviceWorker' in navigator){
   navigator.serviceWorker.register('/sw.js').catch(()=>{});
 }
 
+/* ── Share Target: başka uygulamadan paylaşım gelirse rüya günlüğünü aç ── */
+(function(){
+  const p = new URLSearchParams(location.search);
+  const shared = p.get('text') || p.get('title') || p.get('url');
+  if(!shared) return;
+  // URL'i temizle
+  history.replaceState({}, '', location.pathname + location.hash);
+  // Panel açıldıktan sonra günlüğe yaz
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      // Rüya günlüğü paneline geç
+      const btn = document.querySelector('[data-panel="journal"]') || document.querySelector('[data-tab="journal"]');
+      if(btn) btn.click();
+      // Textarea varsa doldur
+      setTimeout(() => {
+        const ta = document.querySelector('#journal-input, textarea[data-journal]');
+        if(ta){ ta.value = shared; ta.dispatchEvent(new Event('input')); }
+      }, 400);
+    }, 600);
+  });
+})();
+
 
 // Cursor hover on onboarding elements
 document.querySelectorAll('.ob-mood,.ob-btn,.ob-btn-ghost,.ob-ctx').forEach(el=>{

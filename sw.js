@@ -1,17 +1,20 @@
-const CACHE = 'duse-v2';
-const FILES = [
+const CACHE = 'duse-v3';
+const STATIC = [
   '/',
   '/index.html',
   '/app.html',
+  '/privacy.html',
+  '/manifest.json',
   '/assets/logo.png'
 ];
 
-/* ── Install & cache ── */
+/* ── Install & cache static shell ── */
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(STATIC)));
   self.skipWaiting();
 });
 
+/* ── Activate: temizle eski cache ── */
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
@@ -21,10 +24,48 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
+/* ── Fetch: stale-while-revalidate ── */
 self.addEventListener('fetch', e => {
+  // Sadece GET, aynı origin
+  if (e.request.method !== 'GET') return;
+  const url = new URL(e.request.url);
+  if (url.origin !== self.location.origin) return;
+
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+    caches.open(CACHE).then(async cache => {
+      const cached = await cache.match(e.request);
+      const fetchPromise = fetch(e.request).then(res => {
+        if (res && res.status === 200) cache.put(e.request, res.clone());
+        return res;
+      }).catch(() => cached); // offline → cache'den sun
+      // Varsa önce cache'i göster, arka planda güncelle
+      return cached || fetchPromise;
+    })
   );
+});
+
+/* ── Periodic Background Sync ── */
+self.addEventListener('periodicsync', e => {
+  if (e.tag === 'duse-refresh') {
+    e.waitUntil(
+      caches.open(CACHE).then(cache =>
+        Promise.all(
+          STATIC.map(url =>
+            fetch(url).then(res => {
+              if (res && res.status === 200) cache.put(url, res);
+            }).catch(() => {})
+          )
+        )
+      )
+    );
+  }
+});
+
+/* ── Background Sync ── */
+self.addEventListener('sync', e => {
+  if (e.tag === 'duse-sync') {
+    e.waitUntil(Promise.resolve());
+  }
 });
 
 /* ── Notification scheduling ── */
@@ -36,7 +77,6 @@ self.addEventListener('message', e => {
   if (e.data.type === 'SCHEDULE_NOTIF') {
     const { tag, title, body, delayMs, icon } = e.data;
 
-    // Cancel existing timeout for this tag
     if (scheduled.has(tag)) {
       clearTimeout(scheduled.get(tag));
       scheduled.delete(tag);
