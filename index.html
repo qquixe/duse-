@@ -500,6 +500,11 @@
       position:fixed; bottom:32px; right:32px; z-index:800;
       display:flex; flex-direction:column; align-items:flex-end; gap:10px;
       pointer-events:none;
+      opacity:0; transform:translateY(16px) scale(.92);
+      transition:opacity .5s ease, transform .5s ease;
+    }
+    #uma-widget.uma-visible {
+      opacity:1; transform:translateY(0) scale(1);
     }
     #uma-bubble {
       background:rgba(8,6,20,.92);
@@ -1072,6 +1077,9 @@ window.addEventListener('scroll',()=>{
   document.querySelector('nav').classList.toggle('scrolled',sy>60);
   // Disable hero parallax once scrolled past hero
   heroParaxEnabled = sy < window.innerHeight * .8;
+  // Uma widget — hero'dan çıkınca görün
+  const umaW = document.getElementById('uma-widget');
+  if(umaW) umaW.classList.toggle('uma-visible', sy > window.innerHeight * .55);
 });
 
 /* ═══ SMOOTH SCROLL ═══ */

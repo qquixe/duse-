@@ -1,14 +1,17 @@
 {
+  "id": "/app.html",
   "name": "DÜŞÉ — Zihnini Bırak, Rüyana Düş",
   "short_name": "DÜŞÉ",
   "description": "Uyku odaklı ses, nefes, rutin ve rüya uygulaması",
   "start_url": "/app.html",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#07080f",
   "theme_color": "#07080f",
   "orientation": "portrait-primary",
   "lang": "tr",
+  "dir": "ltr",
   "categories": ["health", "lifestyle", "music"],
   "icons": [
     {
@@ -28,9 +31,30 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "assets/app-icon/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/screen-wide.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "DÜŞÉ — Ses Atölyesi"
+    },
+    {
+      "src": "assets/screenshots/screen-mobile.jpg",
+      "sizes": "390x844",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "DÜŞÉ — Ana Ekran"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Rüya Günlüğü",
